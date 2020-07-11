@@ -4,6 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import {connect} from 'react-redux'
+import {setCity} from './business/actions'
+
 import './App.css';
 
 import LocationList from './components/LocationList';
@@ -17,6 +20,7 @@ const cities = [
 ]
 
 
+
 class  App extends Component {
 
 constructor(){
@@ -27,9 +31,8 @@ constructor(){
 }
 
   handleSelectedLocation = (city) => {
-    this.setState({
-      city
-    })
+    this.setState({city})
+    this.props.setCity(city);
       }
  
 render(){
@@ -64,5 +67,8 @@ render(){
 }
  
 }
-
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  setCity: value => dispatch(setCity(value))
+})
+const AppConnected = connect(null,mapDispatchToProps)(App);
+export default AppConnected;
