@@ -5,20 +5,7 @@ import ForecastItem from '../components/ForecastItem/'
 import transformForecast from '../services/transformForecast'
 
 
-const days = [
-  'Lunes',
-  'Martes',
-  'Miercoles',
-  'Jueves',
-  'Viernes',
-];
 
-const data = {
-  temperature: 18,
-  wind: '40',
-  weatherState: 'normal',
-  humidity: 10
-}
 
 class ForecastExtended extends Component {
 

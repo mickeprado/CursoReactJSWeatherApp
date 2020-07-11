@@ -1,16 +1,18 @@
-import React , {Component} from 'react';
-import {Grid,Col,Row} from 'react-flexbox-grid';
+import React, { Component } from 'react';
+import { Grid, Col, Row } from 'react-flexbox-grid';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import {connect} from 'react-redux'
-import {setCity} from './business/actions'
+
+
+
+
 
 import './App.css';
 
-import LocationList from './components/LocationList';
-import ForecastExtended from './components/ForecastExtended';
+import LocationListContainer from './containers/LocationListContainer';
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
 const cities = [
   'Guadalajara,mx',
   'Bogota,col',
@@ -21,54 +23,43 @@ const cities = [
 
 
 
-class  App extends Component {
+class App extends Component {
 
-constructor(){
-  super();
-  this.state = {
-    city: ''
-  }
-}
-
-  handleSelectedLocation = (city) => {
-    this.setState({city})
-    this.props.setCity(city);
-      }
  
-render(){
-  return (
-    <Grid >
-      <Row>
-        <AppBar position="sticky">
-          <Toolbar >
-            <Typography variant="inherit" color="inherit">
-              Weather App
+
+
+  render() {
+    return (
+      <Grid >
+        <Row>
+          <AppBar position="sticky">
+            <Toolbar >
+              <Typography variant="inherit" color="inherit">
+                Weather App
             </Typography>
-          </Toolbar>
-        </AppBar>
-      </Row>
-      <Row>
-        <Col xs={12} md={6}>
-        <LocationList 
-        cities = {cities}
-        onSelectedLocation={this.handleSelectedLocation}
-        />
-        </Col>
-        <Col xs={12} md={6}>
-          <Paper elevation={4}>
-          <div className="details">
-  {this.state.city !== '' ? <ForecastExtended city={this.state.city}/>: <div></div>} 
-          </div>
-          </Paper>
-        </Col>
-      </Row>
-    </Grid>
-  );
+            </Toolbar>
+          </AppBar>
+        </Row>
+        <Row>
+          <Col xs={12} md={6}>
+            <LocationListContainer
+              cities={cities}
+
+            />
+          </Col>
+          <Col xs={12} md={6}>
+            <Paper elevation={4}>
+              <div className="details">
+                <ForecastExtendedContainer /> 
+              </div>
+            </Paper>
+          </Col>
+        </Row>
+      </Grid>
+    );
+  }
+
 }
- 
-}
-const mapDispatchToProps = (dispatch) => ({
-  setCity: value => dispatch(setCity(value))
-})
-const AppConnected = connect(null,mapDispatchToProps)(App);
-export default AppConnected;
+
+export default App;
+
